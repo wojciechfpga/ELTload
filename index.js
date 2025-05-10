@@ -23,11 +23,10 @@ const auth = new google.auth.GoogleAuth({
   scopes: ['https://www.googleapis.com/auth/drive.file'],
 });
 
-
 const drive = google.drive({ version: 'v3', auth });
 
 // Upload pliku i zapis do folderu
-app.post('/upload', upload.single('file'), async (req, res) => {
+app.post('/', upload.single('file'), async (req, res) => {
   try {
     const fileMetadata = {
       name: req.file.originalname,
@@ -53,6 +52,11 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     console.error('Błąd przy uploadzie:', error.message);
     res.status(500).json({ error: error.message });
   }
+});
+
+// Endpoint GET zwracający HTML
+app.get('/', (req, res) => {
+  res.send('<h1>Lasowski Wojciech - WSEI - 2025</h1>');
 });
 
 app.listen(port, () => {
