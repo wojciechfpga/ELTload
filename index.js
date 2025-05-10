@@ -16,8 +16,10 @@ const upload = multer({ dest: 'uploads/' });
 const FOLDER_ID = "1MCmgo1f-XaAwYGimzvpUPNs7NMJvyfis";
 
 // Autoryzacja Google Drive
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+
 const auth = new google.auth.GoogleAuth({
-  credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
+  credentials,
   scopes: ['https://www.googleapis.com/auth/drive.file'],
 });
 
